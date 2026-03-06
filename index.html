@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pozo Grande · casa en venta</title>
+  <title>Pozo Grande · Casa en venta</title>
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -407,11 +407,34 @@
       <i class="fas fa-crown"></i>
       <span>POZO <strong>GRANDE</strong></span>
     </div>
+
+     <!-- CONTENEDOR FLEX PARA EL BOTÓN + NAV -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      
+      <!-- BOTÓN DE DESCARGA PDF -->
+      <a href="assets/POZO GRANDE(2).pdf" 
+         download="Avaluo-Pozo-Grande.pdf"
+         style="background-color: #b48c4c; 
+                color: #0b2a4f; 
+                padding: 8px 20px; 
+                border-radius: 40px; 
+                text-decoration: none; 
+                font-weight: 500; 
+                font-size: 0.9rem;
+                border: 1px solid #b48c4c;
+                transition: 0.2s;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                white-space: nowrap;">
+        <i class="fas fa-file-pdf"></i> Avalúo PDF
+      </a>
+      
     <div class="nav-links">
-      <a href="#carrusel">fotos</a>
-      <a href="#amenidades">amenidades</a>
-      <a href="#mapa">ubicación</a>
-      <a href="#contacto">contacto</a>
+      <a href="#carrusel">Fotos</a>
+      <a href="#amenidades">Amenidades</a>
+      <a href="#mapa">Ubicación</a>
+      <a href="#contacto">Contacto</a>
     </div>
   </div>
 </header>
@@ -420,7 +443,7 @@
 
   <!-- Título y precio con dirección exacta -->
   <div class="hero-title">
-    <h1>Pozo Grande 108<br><span style="font-weight: 200; font-size: 1.6rem;">casa habitación · Aguascalientes</span></h1>
+    <h1>Pozo Grande 108<br><span style="font-weight: 200; font-size: 1.6rem;">Casa habitación · Aguascalientes</span></h1>
     <div class="direccion-hero">
       <i class="fas fa-map-pin" style="color: var(--dorado);"></i> POZO GRANDE #108, POZO BRAVO NORTE, AGUASCALIENTES
     </div>
@@ -433,30 +456,28 @@
   <section id="carrusel" class="carrusel-section">
     <div class="slider-container">
       <div class="my-slider" id="slider">
-        <!-- 1-17 fotos (placeholder) con números para identificar, pondremos imagenes de muestra (gris con texto) -->
-        <!-- pero usaremos imágenes de placeholder premium de pexels / o colores suaves con íconos -->
-        <!-- por brevedad: imágenes de placeholder con fondo azul/dorado, siempre con un texto fino -->
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Fachada+1" alt="casa fachada 1"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Sala+principal" alt="sala"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Comedor" alt="comedor"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Cocina" alt="cocina"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Recamara+principal" alt="recamara"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Baño+completo" alt="baño"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Patio+trasero" alt="patio"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Jardin+lateral" alt="jardin"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Vista+azotea" alt="azotea"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Escaleras" alt="escaleras"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Segundo+nivel" alt="segundo"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Estudio" alt="estudio"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Area+de+lavado" alt="lavado"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Cochera+doble" alt="cochera"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Entrada+principal" alt="entrada"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Detalle+muros" alt="detalle"></div>
-        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Vista+nocturna" alt="noche"></div>
+       
+        <div class="slide-item"><img src="assets/1.jpg" alt="casa fachada 1"></div>
+        <div class="slide-item"><img src="assets/2.jpg" alt="sala"></div>
+        <div class="slide-item"><img src="assets/3.jpg" alt="comedor"></div>
+        <div class="slide-item"><img src="assets/4.jpg" alt="cocina"></div>
+        <div class="slide-item"><img src="assets/5.jpg" alt="recamara"></div>
+        <div class="slide-item"><img src="assets/6.jpg" alt="baño"></div>
+        <div class="slide-item"><img src="assets/7.jpg" alt="patio"></div>
+        <div class="slide-item"><img src="assets/8.jpg" alt="jardin"></div>
+        <div class="slide-item"><img src="assets/9.jpg" alt="azotea"></div>
+        <div class="slide-item"><img src="assets/10.jpg" alt="escaleras"></div>
+        <div class="slide-item"><img src="assets/11" alt="segundo"></div>
+        <div class="slide-item"><img src="assets/12.jpg" alt="estudio"></div>
+        <div class="slide-item"><img src="assets/13.jpg" alt="lavado"></div>
+        <div class="slide-item"><img src="assets/14.jpg" alt="cochera"></div>
+        <div class="slide-item"><img src="assets/15.jpg" alt="entrada"></div>
+        <div class="slide-item"><img src="assets/16.jpg" alt="detalle"></div>
+        <div class="slide-item"><img src="assets/17.jpg" alt="noche"></div>
         <!-- video slide (el #18) -->
         <div class="slide-item video-slide">
           <video controls muted loop poster="https://placehold.co/800x600/f8e3b4/black?text=Video+recorrido">
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            <source src="assets/video.mp4" type="video/mp4">
             tu navegador no soporta video.
           </video>
         </div>
@@ -478,31 +499,31 @@
     <div class="amenidades-grid">
       <div class="amenidad-card">
         <i class="fas fa-vector-square"></i>
-        <h3>terreno 180 m²</h3>
+        <h3>Terreno 180 m²</h3>
         <p>12 m x 15 m</p>
       </div>
       <div class="amenidad-card">
         <i class="fas fa-home"></i>
-        <h3>construcción 160 m²</h3>
+        <h3>Construcción 160 m²</h3>
         <p>una planta · 12 años</p>
       </div>
       <div class="amenidad-card">
         <i class="fas fa-water"></i>
-        <h3>losa de cimentación</h3>
-        <p>estructura sólida</p>
+        <h3>Losa de cimentación</h3>
+        <p>Estructura sólida</p>
       </div>
       <div class="amenidad-card">
         <i class="fas fa-tachometer-alt"></i>
-        <h3>vida útil +48 años</h3>
+        <h3>Vida útil +48 años</h3>
         <p>con mantenimiento</p>
       </div>
     </div>
 
     <!-- segunda línea puntos clave -->
     <div class="extra-feature">
-      <span><i class="fas fa-tint"></i> Agua potable · energía · alumbrado</span>
-      <span><i class="fas fa-school"></i> escuelas, templo, comercio</span>
-      <span><i class="fas fa-shield-alt"></i> zona periférica · plusvalía</span>
+      <span><i class="fas fa-tint"></i> Agua potable · Energía · Alumbrado</span>
+      <span><i class="fas fa-school"></i> Escuelas, Templo, Comercio</span>
+      <span><i class="fas fa-shield-alt"></i> Zona periférica · Plusvalía</span>
     </div>
 
     <!-- puntos extraídos del PDF de manera elegante -->
@@ -538,7 +559,7 @@
     <i class="fas fa-phone-alt" style="color: var(--dorado); font-size: 1.6rem;"></i>
     <span style="font-size: 1.4rem; margin: 0 16px; font-weight: 200;">449 123 4567</span>
     <i class="fas fa-envelope" style="color: var(--dorado); font-size: 1.6rem;"></i>
-    <span style="font-size: 1.4rem; margin-left: 16px; font-weight: 200;">ventas@pozo.grande</span>
+    <span style="font-size: 1.4rem; margin-left: 16px; font-weight: 200;">marilu0919@yahoo.com.mx</span>
   </div>
 </main>
 
@@ -554,15 +575,33 @@
       <p><i class="fas fa-check"></i> Acabados: yeso, loseta cerámica</p>
     </div>
     <div class="footer-col">
-      <p><i class="fas fa-calendar"></i> expedición avalúo: 09/02/2026</p>
-      <p><i class="fas fa-clock"></i> caducidad: 10/08/2026</p>
+      <p><i class="fas fa-calendar"></i> Expedición avalúo: 09/02/2026</p>
+      <p><i class="fas fa-clock"></i> Caducidad: 10/08/2026</p>
       <p><i class="fas fa-tag"></i> valor comercial: $2,582,000 M.N.</p>
     </div>
   </div>
   <div class="footer-small">
     <span>© 2026 POZO GRANDE · diseño minimalista con </span><i class="fas fa-heart" style="color: var(--dorado);"></i><span> · todos los datos del PDF oficial</span><br>
-    <span style="opacity: 0.7;">blog estático para venta de casa · #108 Pozo Grande, Aguascalientes</span>
+    <span style="opacity: 0.7;">Blog estático para venta de casa · #108 Pozo Grande, Aguascalientes</span>
   </div>
+  <div style="text-align: center; margin: 30px 0 20px;">
+  <a href="ASSETS/POZO GRANDE(2).pdf" 
+     download="Avaluo-Pozo-Grande.pdf"
+     style="background-color: transparent; 
+            color: #b48c4c; 
+            padding: 12px 32px; 
+            border-radius: 60px; 
+            text-decoration: none; 
+            font-weight: 400; 
+            font-size: 1rem;
+            border: 2px solid #b48c4c;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;">
+    <i class="fas fa-download"></i> Descargar avalúo completo (PDF)
+  </a>
+</div>
 </footer>
 
 <!-- scripts: tiny slider + inicialización -->
