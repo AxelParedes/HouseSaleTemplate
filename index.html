@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pozo Grande · casa en venta</title>
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- tiny slider (carrusel ligero) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #1e2f4d; /* azul profundo */
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* paleta: azul, dorado, amarillo, blanco */
+    :root {
+      --azul-oscuro: #0b2a4f;
+      --azul-claro:   #e6f0fa;
+      --dorado:       #b48c4c;
+      --amarillo:     #f8e3b4;
+      --blanco:       #ffffff;
+      --gris-sutil:   #f7f7f9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header elegante minimal */
+    header {
+      background-color: var(--blanco);
+      border-bottom: 1px solid rgba(180, 140, 76, 0.2);
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(4px);
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo i {
+      color: var(--dorado);
+      font-size: 1.8rem;
+    }
+
+    .logo span {
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: var(--azul-oscuro);
+    }
+    .logo strong {
+      font-weight: 600;
+      color: var(--dorado);
+      margin-left: 4px;
+    }
+
+    .nav-links a {
+      color: var(--azul-oscuro);
+      text-decoration: none;
+      margin-left: 32px;
+      font-size: 0.95rem;
+      font-weight: 400;
+      transition: color 0.2s;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover {
+      color: var(--dorado);
+      border-bottom-color: var(--dorado);
+    }
+
+    /* HERO título */
+    .hero-title {
+      margin: 60px 0 30px;
+    }
+    .hero-title h1 {
+      font-size: 2.8rem;
+      font-weight: 400;
+      color: var(--azul-oscuro);
+      line-height: 1.2;
+    }
+    .hero-title .direccion-hero {
+      font-size: 1.2rem;
+      color: var(--dorado);
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .hero-title .precio {
+      margin-top: 16px;
+      font-size: 2rem;
+      font-weight: 300;
+      background: linear-gradient(145deg, var(--azul-oscuro), #1f3a5f);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .precio span {
+      background: none;
+      font-weight: 500;
+      color: var(--dorado);
+      -webkit-text-fill-color: initial;
+      background: none;
+    }
+
+    /* CARRUSEL  (17 fotos + 1 video) */
+    .carrusel-section {
+      margin: 40px 0 30px;
+    }
+    .slider-container {
+      position: relative;
+      background: var(--gris-sutil);
+      border-radius: 28px;
+      padding: 10px 0;
+    }
+    .my-slider {
+      display: flex;
+      gap: 12px; /* se sobreescribe por tiny pero dejamos estético */
+    }
+    .slide-item {
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--blanco);
+      box-shadow: 0 5px 18px rgba(0,0,0,0.02);
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f2f2f2;
+    }
+    .slide-item img, .slide-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none; /* para que no detenga el slider */
+    }
+    .video-slide video {
+      object-fit: cover;
+      pointer-events: auto; /* permitir play si quiere */
+    }
+    /* custom nav dorado */
+    .tns-nav {
+      text-align: center;
+      margin: 18px 0 8px;
+    }
+    .tns-nav button {
+      width: 10px;
+      height: 10px;
+      background: rgba(180, 140, 76, 0.3);
+      border: none;
+      border-radius: 50%;
+      margin: 0 5px;
+      transition: all 0.2s;
+    }
+    .tns-nav button.tns-nav-active {
+      background: var(--dorado);
+      transform: scale(1.2);
+    }
+    button[data-action] {
+      color: var(--dorado);
+      background: rgba(255,255,255,0.9);
+      border: none;
+      border-radius: 40px;
+      font-size: 1.6rem;
+      width: 46px;
+      height: 46px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    /* descripción / amenidades interactivas */
+    .amenidades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+      margin: 60px 0 30px;
+    }
+
+    .amenidad-card {
+      background-color: var(--blanco);
+      border: 1px solid rgba(180, 140, 76, 0.15);
+      border-radius: 36px;
+      padding: 32px 20px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+      box-shadow: 0 4px 10px rgba(11, 42, 79, 0.02);
+    }
+    .amenidad-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 28px -8px rgba(180,140,76,0.15);
+      border-color: rgba(180,140,76,0.3);
+    }
+    .amenidad-card i {
+      font-size: 2.6rem;
+      color: var(--dorado);
+      margin-bottom: 20px;
+    }
+    .amenidad-card h3 {
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--azul-oscuro);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .amenidad-card p {
+      color: #4b5f7a;
+      font-weight: 300;
+      font-size: 0.95rem;
+      background: var(--amarillo);
+      padding: 6px 12px;
+      border-radius: 100px;
+      display: inline-block;
+      color: var(--azul-oscuro);
+    }
+    .extra-feature {
+      background-color: var(--azul-claro);
+      border-radius: 100px;
+      padding: 20px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0;
+    }
+    .extra-feature span {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.15rem;
+    }
+    .extra-feature i {
+      color: var(--dorado);
+      font-size: 1.6rem;
+    }
+
+    /* mapa wrapper con iframe */
+    .mapa-wrapper {
+      background: linear-gradient(10deg, var(--blanco) 0%, #fefcf8 100%);
+      border-radius: 48px 48px 24px 24px;
+      padding: 35px 25px 25px 25px;
+      margin: 60px 0;
+      border: 1px solid #f0e5d2;
+    }
+    .mapa-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+    .map-texto {
+      flex: 1 1 220px;
+    }
+    .map-texto h2 {
+      font-weight: 350;
+      font-size: 2rem;
+      color: var(--azul-oscuro);
+      margin-bottom: 12px;
+    }
+    .direccion-estatica {
+      background: var(--amarillo);
+      border-radius: 50px;
+      padding: 18px 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 1.2rem;
+      color: var(--azul-oscuro);
+      border: 1px solid var(--dorado);
+      margin-top: 18px;
+    }
+    .direccion-estatica i {
+      color: var(--dorado);
+      font-size: 1.8rem;
+    }
+    .map-iframe {
+      flex: 2 1 400px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+      border: 1px solid rgba(180,140,76,0.2);
+      background: #e9eef3;
+    }
+    .map-iframe iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      border: 0;
+    }
+    .static-map-caption {
+      text-align: right;
+      font-size: 0.75rem;
+      color: #a09585;
+      margin-top: 6px;
+      padding-right: 8px;
+    }
+
+    /* footer elegante */
+    footer {
+      background-color: var(--azul-oscuro);
+      color: #e2d9cc;
+      padding: 48px 0 28px;
+      margin-top: 60px;
+      border-radius: 48px 48px 0 0;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 40px;
+    }
+    .footer-col p {
+      font-weight: 300;
+      margin: 16px 0;
+    }
+    .footer-col i {
+      color: var(--dorado);
+      margin-right: 8px;
+    }
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 200;
+      letter-spacing: 2px;
+    }
+    .footer-logo strong {
+      color: var(--dorado);
+      font-weight: 400;
+    }
+    .footer-small {
+      text-align: center;
+      border-top: 1px solid rgba(255,215,140,0.15);
+      margin-top: 48px;
+      padding-top: 28px;
+      font-size: 0.9rem;
+      color: #bba88b;
+    }
+    .footer-small a {
+      color: var(--amarillo);
+      text-decoration: none;
+    }
+
+    /* botones de carrusel personalizados */
+    #custom-controls {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 18px;
+    }
+    #custom-controls button {
+      background: none;
+      border: 1px solid var(--dorado);
+      color: var(--dorado);
+      width: 48px;
+      height: 48px;
+      border-radius: 60px;
+      font-size: 1.6rem;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    #custom-controls button:hover {
+      background: var(--dorado);
+      color: white;
+    }
+
+    /* responsive */
+    @media (max-width: 640px) {
+      .hero-title h1 { font-size: 2rem; }
+      .header-flex { flex-direction: column; gap: 12px; }
+      .nav-links a { margin: 0 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container header-flex">
+    <div class="logo">
+      <i class="fas fa-crown"></i>
+      <span>POZO <strong>GRANDE</strong></span>
+    </div>
+    <div class="nav-links">
+      <a href="#carrusel">fotos</a>
+      <a href="#amenidades">amenidades</a>
+      <a href="#mapa">ubicación</a>
+      <a href="#contacto">contacto</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- Título y precio con dirección exacta -->
+  <div class="hero-title">
+    <h1>Pozo Grande 108<br><span style="font-weight: 200; font-size: 1.6rem;">casa habitación · Aguascalientes</span></h1>
+    <div class="direccion-hero">
+      <i class="fas fa-map-pin" style="color: var(--dorado);"></i> POZO GRANDE #108, POZO BRAVO NORTE, AGUASCALIENTES
+    </div>
+    <div class="precio">
+      $ 2,582,000 <span>M.N.</span>
+    </div>
+  </div>
+
+  <!-- CARRUSEL 17 FOTOS + 1 VIDEO (exactamente 18 slides) -->
+  <section id="carrusel" class="carrusel-section">
+    <div class="slider-container">
+      <div class="my-slider" id="slider">
+        <!-- 1-17 fotos (placeholder) con números para identificar, pondremos imagenes de muestra (gris con texto) -->
+        <!-- pero usaremos imágenes de placeholder premium de pexels / o colores suaves con íconos -->
+        <!-- por brevedad: imágenes de placeholder con fondo azul/dorado, siempre con un texto fino -->
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Fachada+1" alt="casa fachada 1"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Sala+principal" alt="sala"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Comedor" alt="comedor"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Cocina" alt="cocina"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Recamara+principal" alt="recamara"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Baño+completo" alt="baño"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Patio+trasero" alt="patio"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Jardin+lateral" alt="jardin"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Vista+azotea" alt="azotea"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Escaleras" alt="escaleras"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Segundo+nivel" alt="segundo"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Estudio" alt="estudio"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Area+de+lavado" alt="lavado"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Cochera+doble" alt="cochera"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Entrada+principal" alt="entrada"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/b48c4c/white?text=Detalle+muros" alt="detalle"></div>
+        <div class="slide-item"><img src="https://placehold.co/800x600/0b2a4f/white?text=Vista+nocturna" alt="noche"></div>
+        <!-- video slide (el #18) -->
+        <div class="slide-item video-slide">
+          <video controls muted loop poster="https://placehold.co/800x600/f8e3b4/black?text=Video+recorrido">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            tu navegador no soporta video.
+          </video>
+        </div>
+      </div>
+      <!-- custom arrows fuera (usaremos tiny slider con controles) -->
+    </div>
+    <div id="custom-controls">
+      <button id="prevSlide"><i class="fas fa-arrow-left"></i></button>
+      <button id="nextSlide"><i class="fas fa-arrow-right"></i></button>
+    </div>
+    <p style="text-align: center; margin-top: 12px; color: #a1907a;"><i class="fas fa-camera-retro"></i> 17 fotos + video inmersivo</p>
+  </section>
+
+  <!-- Amenidades interactivas y puntos positivos extraídos del avalúo -->
+  <section id="amenidades">
+    <div style="text-align: center; margin: 40px 0 10px;">
+      <span style="background: var(--amarillo); padding: 8px 28px; border-radius: 40px; color: var(--azul-oscuro); letter-spacing: 1px;">DETALLES DE LA PROPIEDAD</span>
+    </div>
+    <div class="amenidades-grid">
+      <div class="amenidad-card">
+        <i class="fas fa-vector-square"></i>
+        <h3>terreno 180 m²</h3>
+        <p>12 m x 15 m</p>
+      </div>
+      <div class="amenidad-card">
+        <i class="fas fa-home"></i>
+        <h3>construcción 160 m²</h3>
+        <p>una planta · 12 años</p>
+      </div>
+      <div class="amenidad-card">
+        <i class="fas fa-water"></i>
+        <h3>losa de cimentación</h3>
+        <p>estructura sólida</p>
+      </div>
+      <div class="amenidad-card">
+        <i class="fas fa-tachometer-alt"></i>
+        <h3>vida útil +48 años</h3>
+        <p>con mantenimiento</p>
+      </div>
+    </div>
+
+    <!-- segunda línea puntos clave -->
+    <div class="extra-feature">
+      <span><i class="fas fa-tint"></i> Agua potable · energía · alumbrado</span>
+      <span><i class="fas fa-school"></i> escuelas, templo, comercio</span>
+      <span><i class="fas fa-shield-alt"></i> zona periférica · plusvalía</span>
+    </div>
+
+    <!-- puntos extraídos del PDF de manera elegante -->
+    <div style="display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin: 24px 0;">
+      <span style="background: var(--blanco); border: 1px solid var(--dorado); border-radius: 40px; padding: 8px 22px;"><i class="fas fa-check-circle" style="color: var(--dorado);"></i> C.O.S. 0.8 / C.U.S. 2.4</span>
+      <span style="background: var(--blanco); border: 1px solid var(--dorado); border-radius: 40px; padding: 8px 22px;"><i class="fas fa-check-circle" style="color: var(--dorado);"></i> Tabique rojo · losa aligerada</span>
+      <span style="background: var(--blanco); border: 1px solid var(--dorado); border-radius: 40px; padding: 8px 22px;"><i class="fas fa-check-circle" style="color: var(--dorado);"></i> Yeso liso · loseta cerámica</span>
+      <span style="background: var(--blanco); border: 1px solid var(--dorado); border-radius: 40px; padding: 8px 22px;"><i class="fas fa-check-circle" style="color: var(--dorado);"></i> 2 frentes (terreno unido)</span>
+    </div>
+  </section>
+
+  <!-- MAPA con iframe interactivo de Google Maps -->
+  <section id="mapa" class="mapa-wrapper">
+    <div class="mapa-container">
+      <div class="map-texto">
+        <h2>Pozo Bravo Norte<br><span style="font-size: 1.1rem; color: var(--dorado);">Aguascalientes</span></h2>
+        <div class="direccion-estatica">
+          <i class="fas fa-map-marked-alt"></i>
+          <div>Calle Pozo Grande #108<br>Fracc. Pozo Bravo Norte, C.P. 20190</div>
+        </div>
+        <p style="margin-top: 32px; font-weight: 200; max-width: 280px;">Referencia: a una cuadra de Av. Siglo XXI Oriente, servicios completos.</p>
+      </div>
+      <div class="map-iframe">
+        <!-- iframe de Google Maps proporcionado -->
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1772766290690!6m8!1m7!1s5l51MIktV2nj-sIPdBdTzg!2m2!1d21.92840323383979!2d-102.2780027452019!3f90.58519956040145!4f-10.513934820941643!5f0.7820865974627469" width="600" height="280" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="static-map-caption">Vista satelital de la ubicación exacta · Google Maps</div>
+  </section>
+
+  <!-- microcontacto antes del footer -->
+  <div style="background: var(--gris-sutil); border-radius: 120px; padding: 24px; text-align: center; margin: 40px 0;" id="contacto">
+    <i class="fas fa-phone-alt" style="color: var(--dorado); font-size: 1.6rem;"></i>
+    <span style="font-size: 1.4rem; margin: 0 16px; font-weight: 200;">449 123 4567</span>
+    <i class="fas fa-envelope" style="color: var(--dorado); font-size: 1.6rem;"></i>
+    <span style="font-size: 1.4rem; margin-left: 16px; font-weight: 200;">ventas@pozo.grande</span>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <div class="footer-logo"><i class="fas fa-crown" style="color: var(--dorado);"></i> POZO <strong>GRANDE</strong></div>
+      <p>Inmueble valuado con clave catastral 01001110110105000 · Avalúo profesional Arq. Salvador Jiménez Ramírez Céd. 2961310</p>
+    </div>
+    <div class="footer-col">
+      <p><i class="fas fa-check"></i> 180 m² suelo / 160 m² const.</p>
+      <p><i class="fas fa-check"></i> Cimentación losa · muros tabique</p>
+      <p><i class="fas fa-check"></i> Acabados: yeso, loseta cerámica</p>
+    </div>
+    <div class="footer-col">
+      <p><i class="fas fa-calendar"></i> expedición avalúo: 09/02/2026</p>
+      <p><i class="fas fa-clock"></i> caducidad: 10/08/2026</p>
+      <p><i class="fas fa-tag"></i> valor comercial: $2,582,000 M.N.</p>
+    </div>
+  </div>
+  <div class="footer-small">
+    <span>© 2026 POZO GRANDE · diseño minimalista con </span><i class="fas fa-heart" style="color: var(--dorado);"></i><span> · todos los datos del PDF oficial</span><br>
+    <span style="opacity: 0.7;">blog estático para venta de casa · #108 Pozo Grande, Aguascalientes</span>
+  </div>
+</footer>
+
+<!-- scripts: tiny slider + inicialización -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
+<script>
+  (function() {
+    var slider = tns({
+      container: '#slider',
+      items: 1,
+      slideBy: 'page',
+      autoplay: false,
+      nav: true,
+      controls: false,  // usaremos botones personalizados
+      mouseDrag: true,
+      lazyload: false,
+      gutter: 12,
+      edgePadding: 20,
+      center: true,
+      navPosition: 'bottom',
+      speed: 400,
+    });
+
+    const prev = document.getElementById('prevSlide');
+    const next = document.getElementById('nextSlide');
+    prev.addEventListener('click', function() { slider.goTo('prev'); });
+    next.addEventListener('click', function() { slider.goTo('next'); });
+
+    // ajustar posible video
+    const video = document.querySelector('.video-slide video');
+    if (video) {
+      video.addEventListener('play', function(e) { e.stopPropagation(); });
+    }
+  })();
+</script>
+
+<!-- sin dependencias extra, todo elegante -->
+</body>
+</html>
