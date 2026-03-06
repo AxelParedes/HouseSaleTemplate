@@ -150,7 +150,9 @@
       overflow: hidden;
       background: var(--blanco);
       box-shadow: 0 5px 18px rgba(0,0,0,0.02);
-      height: 360px;
+      min-height: 360px;  /
+      max-height: 600px;  
+      height: auto;       
       display: flex;
       align-items: center;
       justify-content: center;
@@ -158,14 +160,41 @@
     }
     .slide-item img, .slide-item video {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;           /* altura automática según la imagen */
+      max-height: 600px;      /* no más grande que esto */
+      object-fit: contain;    /* ¡CLAVE! muestra la imagen COMPLETA, sin recortar */
       display: block;
-      pointer-events: none; /* para que no detenga el slider */
+      background-color: #f2f2f2; /* color de fondo para áreas vacías */
     }
-    .video-slide video {
-      object-fit: cover;
-      pointer-events: auto; /* permitir play si quiere */
+
+    .slide-item.premium {
+      background-color: #0b2a4f; /* color azul de fondo */
+      background-image: linear-gradient(45deg, #0b2a4f 0%, #1e3a5f 100%);
+    }
+    
+    .slide-item.premium img {
+      object-fit: contain;
+      width: auto;        /* ancho automático */
+      max-width: 100%;    /* que no se desborde */
+      height: 100%;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* sombra para destacar la foto */
+    }
+    
+    /* Para la foto horizontal específica (1280x591) */
+    .slide-item img[alt*="Comedor"],
+    .slide-item img[alt*="Sala"],
+    .slide-item img[alt*="Cochera"] {
+      object-fit: cover; /* opcional: si quieres que llene el ancho */
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Ajuste para mantener proporciones en móviles */
+    @media (max-width: 640px) {
+      .slide-item {
+        min-height: 250px;
+        max-height: 450px;
+      }
     }
     /* custom nav dorado */
     .tns-nav {
@@ -412,7 +441,7 @@
     <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
       
       <!-- BOTÓN DE DESCARGA PDF -->
-      <a href="assets/POZO GRANDE(2).pdf" 
+      <a href="assets/avaluo.pdf" 
          download="Avaluo-Pozo-Grande.pdf"
          style="background-color: #b48c4c; 
                 color: #0b2a4f; 
@@ -452,29 +481,70 @@
     </div>
   </div>
 
-  <!-- CARRUSEL 17 FOTOS + 1 VIDEO (exactamente 18 slides) -->
+  <!-- CARRUSEL -->
   <section id="carrusel" class="carrusel-section">
     <div class="slider-container">
       <div class="my-slider" id="slider">
        
-        <div class="slide-item"><img src="assets/1.jpg" alt="casa fachada 1"></div>
-        <div class="slide-item"><img src="assets/2.jpg" alt="sala"></div>
-        <div class="slide-item"><img src="assets/3.jpg" alt="comedor"></div>
-        <div class="slide-item"><img src="assets/4.jpg" alt="cocina"></div>
-        <div class="slide-item"><img src="assets/5.jpg" alt="recamara"></div>
-        <div class="slide-item"><img src="assets/6.jpg" alt="baño"></div>
-        <div class="slide-item"><img src="assets/7.jpg" alt="patio"></div>
-        <div class="slide-item"><img src="assets/8.jpg" alt="jardin"></div>
-        <div class="slide-item"><img src="assets/9.jpg" alt="azotea"></div>
-        <div class="slide-item"><img src="assets/10.jpg" alt="escaleras"></div>
-        <div class="slide-item"><img src="assets/11" alt="segundo"></div>
-        <div class="slide-item"><img src="assets/12.jpg" alt="estudio"></div>
-        <div class="slide-item"><img src="assets/13.jpg" alt="lavado"></div>
-        <div class="slide-item"><img src="assets/14.jpg" alt="cochera"></div>
-        <div class="slide-item"><img src="assets/15.jpg" alt="entrada"></div>
-        <div class="slide-item"><img src="assets/16.jpg" alt="detalle"></div>
-        <div class="slide-item"><img src="assets/17.jpg" alt="noche"></div>
-        <!-- video slide (el #18) -->
+        <!-- FOTOS VERTICALES (1-17) con fondo azul y object-fit contain -->
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/1.jpg" alt="casa fachada 1" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/2.jpg" alt="sala" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/3.jpg" alt="comedor" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/4.jpg" alt="cocina" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/5.jpg" alt="recamara" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/6.jpg" alt="baño" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/7.jpg" alt="patio" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/8.jpg" alt="jardin" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/9.jpg" alt="azotea" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/10.jpg" alt="escaleras" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/11" alt="segundo" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/12.jpg" alt="estudio" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/13.jpg" alt="lavado" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/14.jpg" alt="cochera" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/15.jpg" alt="entrada" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/16.jpg" alt="detalle" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        <div class="slide-item" style="background-color: #0b2a4f; display: flex; align-items: center; justify-content: center;">
+          <img src="assets/17.jpg" alt="noche" style="object-fit: contain; width: auto; max-width: 100%; height: 100%;">
+        </div>
+        
+        <!-- FOTO HORIZONTAL (la #18) - Ocupa todo el ancho -->
+        <div class="slide-item" style="background-color: #f2f2f2;">
+          <img src="assets/18.jpg" alt="vista horizontal" style="object-fit: cover; width: 100%; height: 100%;">
+        </div>
+        
+        <!-- video slide (el #19, pero lo dejamos igual) -->
         <div class="slide-item video-slide">
           <video controls muted loop poster="https://placehold.co/800x600/f8e3b4/black?text=Video+recorrido">
             <source src="assets/video.mp4" type="video/mp4">
@@ -585,7 +655,7 @@
     <span style="opacity: 0.7;">Blog estático para venta de casa · #108 Pozo Grande, Aguascalientes</span>
   </div>
   <div style="text-align: center; margin: 30px 0 20px;">
-  <a href="ASSETS/POZO GRANDE(2).pdf" 
+  <a href="ASSETS/avaluo.pdf" 
      download="Avaluo-Pozo-Grande.pdf"
      style="background-color: transparent; 
             color: #b48c4c; 
