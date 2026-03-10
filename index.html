@@ -1315,40 +1315,49 @@
     
     // Función para reiniciar el timer del autoplay
     function resetAutoplay() {
-      if (slider && slider.play) {
-        slider.play(); // Detiene el autoplay actual
-        setTimeout(() => {
-          slider.play(); // Lo reinicia
-        }, 50);
+      if (slider && slider.stop && slider.start) {
+        slider.stop();        // Detiene el autoplay inmediatamente
+        slider.start();       // Lo reinicia desde cero
       }
     }
     
     // Event listeners para reiniciar el timer al interactuar
     prev.addEventListener('click', function() { 
-      slider.goTo('prev'); 
+      slider.goTo('prev');
       resetAutoplay();
     });
     
     next.addEventListener('click', function() { 
-      slider.goTo('next'); 
+      slider.goTo('next');
       resetAutoplay();
     });
-    
-    // Detectar eventos táctiles para móvil (deslizar)
-    const sliderElement = document.querySelector('.slider-container');
-    if (sliderElement) {
+
+    // Detectar cualquier interacción táctil en el carrusel
+    const carruselArea = document.querySelector('.carrusel-section');
+    if (carruselArea) {
       let touchStartX = 0;
       let touchEndX = 0;
+      let touchMoved = false;
       
-      sliderElement.addEventListener('touchstart', function(e) {
+      carruselArea.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
+        touchMoved = false;
       }, { passive: true });
       
-      sliderElement.addEventListener('touchend', function(e) {
+      carruselArea.addEventListener('touchmove', function(e) {
+        touchMoved = true;
+      }, { passive: true });
+      
+      carruselArea.addEventListener('touchend', function(e) {
+        if (!touchMoved) return; // Si no hubo movimiento, ignorar
+        
         touchEndX = e.changedTouches[0].screenX;
-        // Si hubo un deslizamiento significativo, reiniciar timer
-        if (Math.abs(touchEndX - touchStartX) > 30) {
-          resetAutoplay();
+        const diff = Math.abs(touchEndX - touchStartX);
+        
+        // Si el deslizamiento fue significativo
+        if (diff > 30) {
+          // Pequeño retraso para asegurar que el slider ya cambió
+          setTimeout(resetAutoplay, 100);
         }
       }, { passive: true });
     }
