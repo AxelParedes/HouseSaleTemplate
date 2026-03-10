@@ -876,7 +876,7 @@
       }
     }
 
-    /* footer elegante */
+    /* footer */
     footer {
       background-color: var(--azul-oscuro);
       color: #e2d9cc;
@@ -1060,10 +1060,9 @@
   <i class="fas fa-music" id="musicIcon"></i>
 </div>
 
-<!-- Audio de fondo  -->
+<!-- Audio de fondo -->
 <audio id="bgMusic" loop preload="auto">
   <source src="assets/bg-music.mp3" type="audio/mpeg">
-  <source src="assets/bg-music.ogg" type="audio/ogg">
   Tu navegador no soporta audio HTML5.
 </audio>
 
@@ -1221,7 +1220,7 @@
       <span><i class="fas fa-shield-alt"></i> Zona periférica · Plusvalía</span>
     </div>
 
-    <!-- puntos extraídos del PDF -->
+    <!-- puntos extraídos del PDF de manera elegante -->
     <div class="puntos-grid">
       <span class="punto-item"><i class="fas fa-check-circle"></i> C.O.S. 0.8 / C.U.S. 2.4</span>
       <span class="punto-item"><i class="fas fa-check-circle"></i> Tabique rojo · losa aligerada</span>
@@ -1296,10 +1295,10 @@
       container: '#slider',
       items: 1,
       slideBy: 'page',
-      autoplay: true,           // Activar reproducción automática
-      autoplayTimeout: 7000,    // Cambiar cada 5 segundos
-      autoplayButtonOutput: false, // Ocultar botón de autoplay
-      autoplayHoverPause: true,  // Pausar al pasar el mouse
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayButtonOutput: false,
+      autoplayHoverPause: true,
       nav: true,
       controls: false,
       mouseDrag: true,
@@ -1313,8 +1312,46 @@
 
     const prev = document.getElementById('prevSlide');
     const next = document.getElementById('nextSlide');
-    prev.addEventListener('click', function() { slider.goTo('prev'); });
-    next.addEventListener('click', function() { slider.goTo('next'); });
+    
+    // Función para reiniciar el timer del autoplay
+    function resetAutoplay() {
+      if (slider && slider.play) {
+        slider.play(); // Detiene el autoplay actual
+        setTimeout(() => {
+          slider.play(); // Lo reinicia
+        }, 50);
+      }
+    }
+    
+    // Event listeners para reiniciar el timer al interactuar
+    prev.addEventListener('click', function() { 
+      slider.goTo('prev'); 
+      resetAutoplay();
+    });
+    
+    next.addEventListener('click', function() { 
+      slider.goTo('next'); 
+      resetAutoplay();
+    });
+    
+    // Detectar eventos táctiles para móvil (deslizar)
+    const sliderElement = document.querySelector('.slider-container');
+    if (sliderElement) {
+      let touchStartX = 0;
+      let touchEndX = 0;
+      
+      sliderElement.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+      
+      sliderElement.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        // Si hubo un deslizamiento significativo, reiniciar timer
+        if (Math.abs(touchEndX - touchStartX) > 30) {
+          resetAutoplay();
+        }
+      }, { passive: true });
+    }
 
     const video = document.querySelector('.video-slide video');
     if (video) {
@@ -1326,10 +1363,8 @@
     const musicToggle = document.getElementById('musicToggle');
     const musicIcon = document.getElementById('musicIcon');
     
-    // Intentar reproducir automáticamente (puede ser bloqueado por el navegador)
     let musicPlaying = false;
     
-    // Función para toggle música
     function toggleMusic() {
       if (musicPlaying) {
         audio.pause();
@@ -1345,7 +1380,6 @@
     
     musicToggle.addEventListener('click', toggleMusic);
     
-    // Intentar reproducir al cargar la página (si el navegador lo permite)
     audio.play().then(() => {
       musicPlaying = true;
       musicIcon.className = 'fas fa-pause';
